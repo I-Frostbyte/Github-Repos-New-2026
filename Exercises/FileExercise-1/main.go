@@ -5,6 +5,8 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
+	"strings"
 )
 
 const (
@@ -29,20 +31,24 @@ func main () {
 	// Initialize an instance of FileManager
 	manager := NewFileManager(file)
 	
-	newFile, err := manager.CreateFile("test-4") 
+	// Create file with filename.
+	newFile, err := manager.CreateFile("test-6") 
 	if err != nil {
 		log.Fatal(err)
 	}
 	
-	if err := manager.WriteToFile(newFile, []byte("Read from file test.")); err != nil {
+	// Write content to file. In this case, text.
+	if err := manager.WriteToFile(newFile, []byte("Rename file test.")); err != nil {
 		log.Fatal(err)
 	}
 
+	// Read content from file.
 	fileContent, err := manager.ReadFromFile(newFile)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// Read metadata from file to get filename.
 	metadata, err := newFile.Stat()
 	if err != nil {
 		log.Fatal(err)
@@ -50,10 +56,23 @@ func main () {
 
 	fileName := metadata.Name()
 
+	// Print content read from file.
 	fmt.Printf("Content read from %s: %s\n", fileName, fileContent)
+
+	// Extracting the absolute path from file and renaming it.
+	oldPath, newPath, err := FilePaths(newFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Rename file
+	if err := manager.RenameFile(oldPath, newPath); err != nil {
+		log.Fatal(err)
+	}
 }
 
 func (fm *FileManager) CreateFile(filename string) (*os.File, error) {
+	// CreatedFile is stored in the savePath and saved with the filename passed.
 	createdFile, err := os.Create(savePath + "/" + filename + ".txt")
 	if err != nil {
 		return nil, fmt.Errorf("File could not be created in source directory")
@@ -62,11 +81,16 @@ func (fm *FileManager) CreateFile(filename string) (*os.File, error) {
 	return createdFile, nil
 }
 
-func (fm *FileManager) RenameFile(filename, newFilename string) error {
-	panic("unimplemented")
+func (fm *FileManager) RenameFile(oldfilePath, newFilePath string) error {
+	if err := os.Rename(oldfilePath, newFilePath); err != nil {
+		return fmt.Errorf("Could not rename")
+	}
+
+	return nil
 }
 
 func (fm *FileManager) WriteToFile(file *os.File, content []byte) error {
+	// Writing content to file in bytes.
 	_, err := file.Write(content)
 	if err != nil {
 		return fmt.Errorf("Content length doesn't match number of bytes written.")
@@ -76,11 +100,13 @@ func (fm *FileManager) WriteToFile(file *os.File, content []byte) error {
 }
 
 func (fm *FileManager) ReadFromFile(file *os.File) (string, error) {
+	// SeekStart resets the cursor on the file to avoid EOD reading.
 	_, err := file.Seek(0, io.SeekStart)
 	if err != nil {
 		return "", fmt.Errorf("Could not reset cursor")
 	}
-	
+
+	// Reading from file in content bytes.
 	content, err := io.ReadAll(file)
 	if err != nil {
 		return "", fmt.Errorf("Could not read content from file")
@@ -101,4 +127,30 @@ func (fm *FileManager) DeleteFile(filename string) error {
 
 func (fm *FileManager) CopyFile(filename, sourcePath, destinationPath  string) (string, error) {
 	panic("unimplemented")
+}
+
+func FilePaths (file *os.File) (string, string, error) {
+	// Extracting the absolute path of the file.
+	oldPath, err := filepath.Abs(file.Name())
+	if err != nil {
+		return "", "", fmt.Errorf("Could not parse absolute path of file")
+	}
+
+	// Split the path into directory and filename
+	dir := filepath.Dir(oldPath)
+	filename := filepath.Base(oldPath)
+
+	// Separate the extension from the filename
+	ext := filepath.Ext(filename)
+
+	// Remove the extension from the filename
+	name := strings.TrimSuffix(filename, ext)
+
+	// Renaming the filename to the new name
+	newFilename := name + "-renamed" + ext
+
+	// Build the new absolute path
+	newPath := filepath.Join(dir, newFilename)
+
+	return oldPath, newPath, nil
 }
