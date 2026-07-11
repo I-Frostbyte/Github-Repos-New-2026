@@ -34,13 +34,13 @@ func main () {
 	manager := NewFileManager(file)
 	
 	// Create file with filename.
-	newFile, err := manager.CreateFile("test-7") 
+	newFile, err := manager.CreateFile("test-8") 
 	if err != nil {
 		log.Fatal(err)
 	}
 	
 	// Write content to file. In this case, text.
-	if err := manager.WriteToFile(newFile, []byte("Copy file test.")); err != nil {
+	if err := manager.WriteToFile(newFile, []byte("Copy & Delete file test.")); err != nil {
 		log.Fatal(err)
 	}
 
@@ -73,11 +73,16 @@ func main () {
 	}
 
 	// Setting up source and destination paths.
-	sourcePath := savePath + "/" + "test-7-renamed" + ".txt"
-	destinationPath := copyPath + "/" + "test-7-renamed" + ".txt"
+	sourcePath := savePath + "/" + "test-8-renamed" + ".txt"
+	destinationPath := copyPath + "/" + "test-8-renamed" + ".txt"
 
 	// copying file from source to destination
 	if err := manager.CopyFile(sourcePath, destinationPath); err != nil {
+		log.Fatal(err)
+	}
+
+	// Delete file from source folder
+	if err := manager.DeleteFile(sourcePath); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -133,7 +138,11 @@ func (fm *FileManager) ReadFromFile(file *os.File) (string, error) {
 }
 
 func (fm *FileManager) DeleteFile(filename string) error {
-	panic("unimplemented")
+	if err := os.Remove(filename); err != nil {
+		return fmt.Errorf("Could not delete file: %v", err)
+	}
+
+	return nil
 }
 
 func (fm *FileManager) CopyFile(sourcePath, destinationPath  string) error {
