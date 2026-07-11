@@ -1,3 +1,3 @@
 # 🚀 Github Repos New (2026)
 
-Find all coding challenges, projects, tutorials and interview challenges here.
+Find all coding challenges, exercises, projects, tutorials and interview challenges here.
