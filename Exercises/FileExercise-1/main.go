@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
 )
@@ -28,11 +29,28 @@ func main () {
 	// Initialize an instance of FileManager
 	manager := NewFileManager(file)
 	
-	newFile, err := manager.CreateFile("test-1") 
+	newFile, err := manager.CreateFile("test-4") 
 	if err != nil {
 		log.Fatal(err)
 	}
-	newFile.Stat()
+	
+	if err := manager.WriteToFile(newFile, []byte("Read from file test.")); err != nil {
+		log.Fatal(err)
+	}
+
+	fileContent, err := manager.ReadFromFile(newFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	metadata, err := newFile.Stat()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fileName := metadata.Name()
+
+	fmt.Printf("Content read from %s: %s\n", fileName, fileContent)
 }
 
 func (fm *FileManager) CreateFile(filename string) (*os.File, error) {
@@ -48,12 +66,33 @@ func (fm *FileManager) RenameFile(filename, newFilename string) error {
 	panic("unimplemented")
 }
 
-func (fm *FileManager) WriteToFile(file os.File, content []byte) {
-	panic("unimplemented")
+func (fm *FileManager) WriteToFile(file *os.File, content []byte) error {
+	_, err := file.Write(content)
+	if err != nil {
+		return fmt.Errorf("Content length doesn't match number of bytes written.")
+	}
+
+	return nil
 }
 
-func (fm *FileManager) ReadToFile(file os.File, content []byte) {
-	panic("unimplemented")
+func (fm *FileManager) ReadFromFile(file *os.File) (string, error) {
+	_, err := file.Seek(0, io.SeekStart)
+	if err != nil {
+		return "", fmt.Errorf("Could not reset cursor")
+	}
+	
+	content, err := io.ReadAll(file)
+	if err != nil {
+		return "", fmt.Errorf("Could not read content from file")
+	}
+
+	contentString := string(content)
+
+	if contentString == "" {
+		return "", fmt.Errorf("Bytes not properly handled.")
+	}
+
+	return contentString, nil
 }
 
 func (fm *FileManager) DeleteFile(filename string) error {
