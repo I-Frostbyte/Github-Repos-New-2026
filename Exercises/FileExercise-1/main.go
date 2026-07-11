@@ -11,6 +11,8 @@ import (
 
 const (
 	savePath = "source"
+
+	copyPath = "destination"
 )
 
 type FileManager struct {
@@ -32,13 +34,13 @@ func main () {
 	manager := NewFileManager(file)
 	
 	// Create file with filename.
-	newFile, err := manager.CreateFile("test-6") 
+	newFile, err := manager.CreateFile("test-7") 
 	if err != nil {
 		log.Fatal(err)
 	}
 	
 	// Write content to file. In this case, text.
-	if err := manager.WriteToFile(newFile, []byte("Rename file test.")); err != nil {
+	if err := manager.WriteToFile(newFile, []byte("Copy file test.")); err != nil {
 		log.Fatal(err)
 	}
 
@@ -60,13 +62,22 @@ func main () {
 	fmt.Printf("Content read from %s: %s\n", fileName, fileContent)
 
 	// Extracting the absolute path from file and renaming it.
-	oldPath, newPath, err := FilePaths(newFile)
+	oldPath, newPath, err := RenameFilePath(newFile)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Rename file
 	if err := manager.RenameFile(oldPath, newPath); err != nil {
+		log.Fatal(err)
+	}
+
+	// Setting up source and destination paths.
+	sourcePath := savePath + "/" + "test-7-renamed" + ".txt"
+	destinationPath := copyPath + "/" + "test-7-renamed" + ".txt"
+
+	// copying file from source to destination
+	if err := manager.CopyFile(sourcePath, destinationPath); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -125,11 +136,31 @@ func (fm *FileManager) DeleteFile(filename string) error {
 	panic("unimplemented")
 }
 
-func (fm *FileManager) CopyFile(filename, sourcePath, destinationPath  string) (string, error) {
-	panic("unimplemented")
+func (fm *FileManager) CopyFile(sourcePath, destinationPath  string) error {
+	// Open the source file
+	source, err := os.Open(sourcePath)
+	if err != nil {
+		return fmt.Errorf("Could not open source file")
+	}
+	defer source.Close()
+
+	// Create the destination file
+	destination, err := os.Create(destinationPath)
+	if err != nil {
+		return fmt.Errorf("Could not create the destination file")
+	}
+	defer destination.Close()
+
+	// Copy the contents
+	_, err = io.Copy(destination, source)
+	if err != nil {
+		return fmt.Errorf("Could not copy contents of file from source to destination")
+	}
+
+	return nil
 }
 
-func FilePaths (file *os.File) (string, string, error) {
+func RenameFilePath (file *os.File) (string, string, error) {
 	// Extracting the absolute path of the file.
 	oldPath, err := filepath.Abs(file.Name())
 	if err != nil {
