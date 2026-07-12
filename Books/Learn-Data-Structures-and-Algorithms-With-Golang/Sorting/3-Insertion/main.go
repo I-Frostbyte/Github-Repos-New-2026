@@ -25,7 +25,7 @@ func InsertionSort(numbers []int) []int {
 	for i := 1; i < len(numbers); i++ {
 		j := i
 		for j > 0 {
-			// 
+			// compares every number at this index with every index beneath it and swapping them where necessary.
 			if numbers[j-1] > numbers[j] {
 				numbers[j-1], numbers[j] = numbers[j], numbers[j-1]
 			}
