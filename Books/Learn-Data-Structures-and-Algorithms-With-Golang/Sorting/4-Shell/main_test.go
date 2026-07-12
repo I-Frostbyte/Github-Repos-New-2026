@@ -33,6 +33,7 @@ func TestShellSort(t *testing.T) {
 			if !slices.IsSorted(sortedArray) {
 				t.Errorf("got %v: want %v", sortedArray, want)
 			}
+			t.Logf("\n got: %v \n want: %v", sortedArray, want)
 		})
 	}
 }
