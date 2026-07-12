@@ -14,9 +14,14 @@ func BubbleSort(numbers []int) []int {
 
 	isSwapped := true
 
+	// Keep looping as long as least one swap happened during the previous pass
 	for isSwapped {
+		// if array is perfectly sorted, it would break the first loop
 		isSwapped = false
 		for i := 1; i < len(numbers); i++ {
+			// second loop goes through all the numbers in the array and "bubbles" the biggest number to the end.
+			// each time a swap is made, the isSwapped is set to true which would trigger the outer loop AFTER
+			// the inner loop is done.
 			if numbers[i-1] > numbers[i] {
 				temp := numbers[i]
 				numbers[i] = numbers[i-1]
