@@ -11,6 +11,8 @@ type TestCases struct {
 }
 
 func TestSelectionSort(t *testing.T) {
+	// Construct multiple sets of data in a slice
+	// Alternatively could create an expected field with the arranged input but that's manual and I ain't go time for that.
 	tests := []TestCases{
 		{
 			name: "TestOne",
@@ -26,9 +28,12 @@ func TestSelectionSort(t *testing.T) {
 		},
 	}
 
+	// Iterate through the data sets]
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			sortedNumbers := SelectionSort(test.input)
+			// Using slices.Sorted to sort the data and return a brand-new sorted slice
+			// this slice is then stored in the want to be compared with the response from BubbleSort
 			want := slices.Sorted(slices.Values(test.input))
 			if !slices.IsSorted(sortedNumbers) {
 				t.Errorf("got: %v, want: %v", test.input, want)
