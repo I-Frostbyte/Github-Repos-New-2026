@@ -2,15 +2,42 @@ package sort
 
 import (
 	"testing"
+	"slices"
 )
 
-type Test struct {
+type TestCases struct {
 	name string
 	input []int
 }
 
 func TestBubbleSort(t *testing.T) {
+	ArraySorter := NewArraySort([]int{})
 
+	tests := []TestCases{
+		{
+			name: "Bubble Sort: Test One",
+			input: RandomArrayGeneratorForTests(20),
+		},
+		{
+			name: "Bubble Sort: Test Two",
+			input: RandomArrayGeneratorForTests(25),
+		},
+		{
+			name: "Bubble Sort: Test Three",
+			input: RandomArrayGeneratorForTests(30),
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			sortedArray := ArraySorter.BubbleSort(test.input)
+			want := slices.Sorted(slices.Values(test.input))
+			if !slices.IsSorted(sortedArray) {
+				t.Errorf("\n Want: %v \n Got: %v \n", want, sortedArray)
+				t.Logf("\n Want: %v \n Got: %v \n", want, sortedArray)
+			}
+		})
+	}
 }
 
 func TestSelectionSort(t *testing.T) {
@@ -30,5 +57,5 @@ func TestMergeSort(t *testing.T) {
 }
 
 func TestQuickSort(t *testing.T) {
-	
+
 }
