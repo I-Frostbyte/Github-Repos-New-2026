@@ -35,8 +35,29 @@ func (as *ArraySort) BubbleSort(input []int) []int {
 	return input
 }
 
+// SelectionSort implements the Selection Sort algorithm.
+// In this algorithm, the outer loop holds the lowest index of the array.
+// While the inner loop, loops over the remaining indexes of the array.
+// When a number is found lower than that in the current index of the inner loop,
+// The index of that number is stored in the variable that holds the minimum.
+// Note: As the inner loop progresses, the value of the minimum will change
+// to hold the index of the lowest number to the right of the outer loop's current index.
+// When the inner loop is done, the swap function swaps the values at the index stored in the minumum,
+// with the current index held by the outer loop.
+// Essentially the outer loop goes from index 0 to n-1 and for each index, places the lowest number
+// found to the right of it (i.e. in the rest of the array).
 func (as *ArraySort) SelectionSort(input []int) []int {
-	panic ("unimplemented")
+	for i := range input {
+		min := i
+		for j := i + 1; j <= len(input)-1; j++ {
+			if input[j] < input[min] {
+				min = j
+			}
+		}
+		SimpleSwap(input, i, min)
+	}
+
+	return input
 }
 
 func (as *ArraySort) InsertionSort(input []int) []int {
@@ -63,4 +84,8 @@ func RandomArrayGeneratorForTests(arrLength int) []int {
 	}
 
 	return newArray
+}
+
+func SimpleSwap(array []int, firstIndex, secondIndex int) {
+	array[firstIndex], array[secondIndex] = array[secondIndex], array[firstIndex]
 }

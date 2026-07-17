@@ -33,15 +33,41 @@ func TestBubbleSort(t *testing.T) {
 			sortedArray := ArraySorter.BubbleSort(test.input)
 			want := slices.Sorted(slices.Values(test.input))
 			if !slices.IsSorted(sortedArray) {
-				t.Errorf("\n Want: %v \n Got: %v \n", want, sortedArray)
-				t.Logf("\n Want: %v \n Got: %v \n", want, sortedArray)
+				t.Errorf("\n Got: %v \n Want: %v \n", sortedArray, want)
+				t.Logf("\n Got: %v \n Want: %v \n", sortedArray, want)
 			}
 		})
 	}
 }
 
 func TestSelectionSort(t *testing.T) {
+	ArraySorter := NewArraySort([]int{})
 
+	tests := []TestCases{
+		{
+			name: "Selection Sort Test One",
+			input: RandomArrayGeneratorForTests(25),
+		},
+		{
+			name: "Selection Sort Test Two",
+			input: RandomArrayGeneratorForTests(30),
+		},
+		{
+			name: "Selection Sort Test Three",
+			input: RandomArrayGeneratorForTests(35),
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			sortedArray := ArraySorter.SelectionSort(test.input)
+			want := slices.Sorted(slices.Values(test.input))
+			if !slices.IsSorted(sortedArray) {
+				t.Errorf("\n Got: %v \n Want: %v \n", sortedArray, want)
+				t.Logf("\n Got: %v \n Want: %v \n", sortedArray, want)
+			}
+		})
+	}
 }
 
 func TestInsertionSort(t *testing.T) {
