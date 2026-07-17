@@ -10,7 +10,8 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  test:
+ sorting-program-test:
+    name: Sorting Program Tests
     runs-on: ubuntu-latest
     defaults:
       run:
