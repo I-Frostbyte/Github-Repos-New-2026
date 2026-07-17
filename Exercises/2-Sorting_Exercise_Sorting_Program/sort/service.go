@@ -49,7 +49,7 @@ func (as *ArraySort) BubbleSort(input []int) []int {
 func (as *ArraySort) SelectionSort(input []int) []int {
 	for i := range input {
 		min := i
-		for j := i + 1; j <= len(input)-1; j++ {
+		for j := i + 1; j < len(input); j++ {
 			if input[j] < input[min] {
 				min = j
 			}
@@ -83,8 +83,46 @@ func (as *ArraySort) InsertionSort(input []int) []int {
 	return input
 }
 
+// ShellSort implements the Shell Sort algorithm.
+// This algorithm utilizes intervals to break down the array.
+// These intervals allow for sections of the array to be sorted
+// in ascending manner of the intervals.
+// The intervals are created by seeing how many elements can be grouped
+// within the array.
+// The first loop goes through the array of intervals.
+// The second loop (first inner) goes through the broken down array,
+// comparing elements separated by the degree of the interval.
+// The final loop compares the elements at these intervals and sorts them
+// before decrementing by the value of the interval.
 func (as *ArraySort) ShellSort(input []int) []int {
-	panic ("unimplemented")
+	arrayLength := len(input)
+	intervals := []int{1}
+	k := 1
+
+	for {
+		interval := power(2, k) + 1
+		if interval > arrayLength-1 {
+			break
+		}
+		// new interval appended to the start of the array and not the end.
+		intervals = append([]int{interval}, intervals...)
+		k++
+	}
+
+	for _, interval := range intervals {
+		for i := interval; i < arrayLength; i += interval {
+			j := i
+			for j > 0 {
+				if input[j-interval] > input[j] {
+					input[j-interval], input[j] = input[j], input[j-interval]
+				}
+				j = j - interval
+			}
+		}
+	}
+
+	return input
+
 }
 
 func (as *ArraySort) MergeSort(input []int) []int {
@@ -107,4 +145,16 @@ func RandomArrayGeneratorForTests(arrLength int) []int {
 
 func SimpleSwap(array []int, firstIndex, secondIndex int) {
 	array[firstIndex], array[secondIndex] = array[secondIndex], array[firstIndex]
+}
+
+func power(exponent, index int) int {
+	power := 1
+	for index > 0 {
+		if index &1 != 0 {
+			power *= exponent
+		}
+		index >>= 1
+		exponent *= exponent
+	}
+	return power
 }

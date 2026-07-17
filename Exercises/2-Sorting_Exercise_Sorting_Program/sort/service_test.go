@@ -75,15 +75,15 @@ func TestInsertionSort(t *testing.T) {
 
 	tests := []TestCases{
 		{
-			name: "Insertion Sort 1",
+			name: "Insertion Sort Test One",
 			input: RandomArrayGeneratorForTests(25),
 		},
 		{
-			name: "Insertion Sort 2",
+			name: "Insertion Sort Test Two",
 			input: RandomArrayGeneratorForTests(30),
 		},
 		{
-			name: "Insertion Sort 3",
+			name: "Insertion Sort Test Three",
 			input: RandomArrayGeneratorForTests(35),
 		},
 	}
@@ -101,7 +101,33 @@ func TestInsertionSort(t *testing.T) {
 }
 
 func TestShellSort(t *testing.T) {
+	ArraySorter := NewArraySort([]int{})
 
+	tests := []TestCases{
+		{
+			name: "Shell Sort Test One",
+			input: RandomArrayGeneratorForTests(25),
+		},
+		{
+			name: "Shell Sort Test Two",
+			input: RandomArrayGeneratorForTests(30),
+		},
+		{
+			name: "Shell Sort Test Three",
+			input: RandomArrayGeneratorForTests(35),
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			sortedArray := ArraySorter.ShellSort(test.input)
+			want := slices.Sorted(slices.Values(test.input))
+			if !slices.IsSorted(sortedArray) {
+				t.Errorf("\n Got: %v \n Want: %v \n", sortedArray, want)
+				t.Logf("\n Got: %v \n Want: %v \n", sortedArray, want)
+			}
+		})
+	}
 }
 
 func TestMergeSort(t *testing.T) {
