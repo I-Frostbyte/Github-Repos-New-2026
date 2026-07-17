@@ -3,14 +3,18 @@ name: Sorting Program CI
 on:
   push:
     paths:
-      - 'Exercises/2-Sorting_Exercise_Sorting_Program'
+      - 'Exercises/2-Sorting_Exercise_Sorting_Program/**'
+  pull_request:
+    paths:
+      - 'Exercises/2-Sorting_Exercise_Sorting_Program/**'
+    types: [opened, synchronize, reopened]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./Exercises/2-Sorting_Exercise_Sorting_Program
+        working-directory: Exercises/2-Sorting_Exercise_Sorting_Program
 
     steps:
     - name: Check out repository code
