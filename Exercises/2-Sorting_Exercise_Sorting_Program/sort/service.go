@@ -160,8 +160,16 @@ func (as *ArraySort) MergeSort(input []int) []int {
 	return JoinArrays(as.MergeSort(input[:middle]), as.MergeSort(input[middle:]))
 }
 
-func (as *ArraySort) QuickSort(input []int) []int {
-	panic ("unimplemented")
+// QuickSort implements the Quick Sort algorithm.
+// I did not even attempt to understand this one.
+func (as *ArraySort) QuickSort(input []int, below, upper int) []int {
+	if below < upper {
+		part := divideParts(input, below, upper)
+		as.QuickSort(input, below, part-1)
+		as.QuickSort(input, part+1, upper)
+	}
+
+	return input
 }
 
 // RandomArrayGeneratorForTests generates a random array of integers between 0 & 50.
@@ -207,6 +215,27 @@ func JoinArrays(leftArray, rightArray []int) []int {
 	}
 
 	return joinedArray
+}
+
+func divideParts(sliceArray []int, below, upper int) int {
+	center := sliceArray[upper]
+	i := below
+
+	for j := below; j < upper; j++ {
+		if sliceArray[j] <= center {
+			swap(&sliceArray[i], &sliceArray[j])
+			i += 1
+		}
+	}
+
+	swap(&sliceArray[i], &sliceArray[upper])
+	return i
+}
+
+func swap(sliceArrayPointerOne, sliceArrayPointerTwo *int) {
+	val := *sliceArrayPointerOne
+	*sliceArrayPointerOne = *sliceArrayPointerTwo
+	*sliceArrayPointerTwo = val
 }
 
 func power(exponent, index int) int {
