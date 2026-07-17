@@ -180,7 +180,7 @@ func TestQuickSort(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			sortedArray := ArraySorter.QuickSort(test.input, 0, (len(test.input)-1))
+			sortedArray := ArraySorter.QuickSort(test.input, 0, 9)
 			want := slices.Sorted(slices.Values(test.input))
 			if !slices.IsSorted(sortedArray) {
 				t.Errorf("\n Got: %v \n Want: %v \n", sortedArray, want)
