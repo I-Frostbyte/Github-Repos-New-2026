@@ -131,7 +131,33 @@ func TestShellSort(t *testing.T) {
 }
 
 func TestMergeSort(t *testing.T) {
+	ArraySorter := NewArraySort([]int{})
 
+	tests := []TestCases{
+		{
+			name: "Merge Sort Test One",
+			input: RandomArrayGeneratorForTests(25),
+		},
+		{
+			name: "Merge Sort Test Two",
+			input: RandomArrayGeneratorForTests(30),
+		},
+		{
+			name: "Merge Sort Test Three",
+			input: RandomArrayGeneratorForTests(35),
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			sortedArray := ArraySorter.MergeSort(test.input)
+			want := slices.Sorted(slices.Values(test.input))
+			if !slices.IsSorted(sortedArray) {
+				t.Errorf("\n Got: %v \n Want: %v \n", sortedArray, want)
+				t.Logf("\n Got: %v \n Want: %v \n", sortedArray, want)
+			}
+		})
+	}
 }
 
 func TestQuickSort(t *testing.T) {

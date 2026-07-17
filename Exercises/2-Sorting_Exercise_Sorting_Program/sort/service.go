@@ -2,6 +2,8 @@ package sort
 
 import (
 	"math/rand"
+
+	// "google.golang.org/genproto/googleapis/appengine/legacy"
 )
 type ArraySort struct {
 	input []int
@@ -125,14 +127,46 @@ func (as *ArraySort) ShellSort(input []int) []int {
 
 }
 
+// MergeSort implements the Merge Sort algorithm.
+// This algorithm makes use of recursiveness.
+// This function has a supplementary joiner function.
+// The MergeSort breaks down the input array in two and 
+// calls the joiner function and passes in as arguments,
+// the two halves of the input array but passes them as arguments
+// of the MergeSort, initiating the recursiveness.
+// This breaks the array down till it gets to an array of just two elements.
+// It sorts those two and then recursively begins to sort the others, moving
+// up a tree like structure. Like so:
+/*
+
+                       [a b c d e f g h i j]
+                      /                     \
+            [a b c d e]                  [f g h i j]
+            /         \                  /         \
+        [a b]     [c d e]            [f g]     [h i j]
+        /   \      /    \            /   \     /     \
+      [a]   [b]  [c]  [d e]        [f]   [g]  [h]  [i j]
+                       /  \                        /   \
+                      [d] [e]                     [i]  [j]
+
+*/
 func (as *ArraySort) MergeSort(input []int) []int {
-	panic ("unimplemented")
+	if len(input) < 2 {
+		return input
+	}
+
+	middle := (len(input)) / 2
+
+	return JoinArrays(as.MergeSort(input[:middle]), as.MergeSort(input[middle:]))
 }
 
 func (as *ArraySort) QuickSort(input []int) []int {
 	panic ("unimplemented")
 }
 
+// RandomArrayGeneratorForTests generates a random array of integers between 0 & 50.
+// These integers can repeat themselves.
+// This array is solely for testing purposes.
 func RandomArrayGeneratorForTests(arrLength int) []int {
 	newArray := make([]int, arrLength)
 
@@ -143,8 +177,36 @@ func RandomArrayGeneratorForTests(arrLength int) []int {
 	return newArray
 }
 
+// SimpleSwap takes an array of integers, a first index and a second index.
+// It then swaps the element in the first index with the element of the second index.
 func SimpleSwap(array []int, firstIndex, secondIndex int) {
 	array[firstIndex], array[secondIndex] = array[secondIndex], array[firstIndex]
+}
+
+// JoinArrays takes two arrays and joins them while sorting
+// the elements of the joined array in ascending order.
+func JoinArrays(leftArray, rightArray []int) []int {
+	lengthOfJoinedArray, i, j := len(leftArray)+len(rightArray), 0, 0
+
+	joinedArray := make([]int, lengthOfJoinedArray)
+
+	for k := range joinedArray {
+		if i > len(leftArray)-1 && j <= len(rightArray)-1 {
+			joinedArray[k] = rightArray[j]
+			j++
+		} else if i <= len(leftArray)-1 && j > len(rightArray)-1 {
+			joinedArray[k] = leftArray[i]
+			i++
+		} else if leftArray[i] < rightArray[j] {
+			joinedArray[k] = leftArray[i]
+			i++
+		} else {
+			joinedArray[k] = rightArray[j]
+			j++
+		}
+	}
+
+	return joinedArray
 }
 
 func power(exponent, index int) int {
