@@ -71,7 +71,33 @@ func TestSelectionSort(t *testing.T) {
 }
 
 func TestInsertionSort(t *testing.T) {
+	ArraySorter := NewArraySort([]int{})
 
+	tests := []TestCases{
+		{
+			name: "Insertion Sort 1",
+			input: RandomArrayGeneratorForTests(25),
+		},
+		{
+			name: "Insertion Sort 2",
+			input: RandomArrayGeneratorForTests(30),
+		},
+		{
+			name: "Insertion Sort 3",
+			input: RandomArrayGeneratorForTests(35),
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			sortedArray := ArraySorter.InsertionSort(test.input)
+			want := slices.Sorted(slices.Values(test.input))
+			if !slices.IsSorted(sortedArray) {
+				t.Errorf("\n Got: %v \n Want: %v", sortedArray, want)
+				t.Logf("\n Got: %v \n Want: %v", sortedArray, want)
+			}
+		})
+	}
 }
 
 func TestShellSort(t *testing.T) {

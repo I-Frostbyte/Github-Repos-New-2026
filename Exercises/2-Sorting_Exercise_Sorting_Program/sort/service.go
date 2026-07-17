@@ -60,8 +60,27 @@ func (as *ArraySort) SelectionSort(input []int) []int {
 	return input
 }
 
+// InsertionSort implements the Insertion Sort algorithm.
+// In this algorithm there are two loops. The outer loop cycles through
+// the elements of the array.
+// For each index, the inner loop runs which compares the value of the
+// element in that index to the one beneath it and if condition is true, swaps them.
+// It then descends down the left of the array, comparing every element with its
+// neighbor.
+// Essentially for each index, the sort counts down to 0 while checking each element
+// and swapping.
 func (as *ArraySort) InsertionSort(input []int) []int {
-	panic ("unimplemented")
+	for i := 1; i < len(input); i++ {
+		j := i
+		for j > 0 {
+			if input[j-1] > input[j] {
+				input[j-1], input[j] = input[j], input[j-1]
+			}
+			j = j-1
+		}
+	}
+
+	return input
 }
 
 func (as *ArraySort) ShellSort(input []int) []int {
