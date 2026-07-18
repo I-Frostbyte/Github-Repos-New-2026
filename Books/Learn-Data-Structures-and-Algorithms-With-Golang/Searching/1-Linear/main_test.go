@@ -14,9 +14,9 @@ type arrGenRes struct {
 	err error
 }
 
-func NewInput(arrLength, elementToFind int) arrGenRes {
+func NewInput(arrLength, elementToFind int, lookForElement bool) arrGenRes {
 	arrayGenerator := generator.NewGenerator()
-	testInput, elementFound, err := arrayGenerator.RandomIntegerArrayGenerator(arrLength, elementToFind, true)
+	testInput, elementFound, err := arrayGenerator.RandomIntegerArrayGenerator(arrLength, elementToFind, lookForElement)
 	return arrGenRes{
 		array: *testInput,
 		found: elementFound,
@@ -34,15 +34,15 @@ func TestLinearSearch(t *testing.T) {
 	tests := []TestCases{
 		{
 			name: "Linear Search Test One",
-			input: NewInput(25, 15),
+			input: NewInput(25, 15, true),
 		},
 		{
 			name: "Linear Search Test Two",
-			input: NewInput(30, 8),
+			input: NewInput(30, 8, true),
 		},
 		{
 			name: "Linear Search Test Three",
-			input: NewInput(35, 27),
+			input: NewInput(35, 27, true),
 		},
 	}
 
