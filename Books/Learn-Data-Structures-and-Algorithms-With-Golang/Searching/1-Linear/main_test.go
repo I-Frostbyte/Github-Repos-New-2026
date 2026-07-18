@@ -14,19 +14,31 @@ type arrGenRes struct {
 	err error
 }
 
+func NewInput(arrLength, elementToFind int, err error) arrGenRes {
+	arrayGenerator := generator.NewGenerator()
+	testInput, elementFound, err := arrayGenerator.RandomIntegerArrayGenerator(arrLength, elementToFind, true)
+	return arrGenRes{
+		array: *testInput,
+		found: elementFound,
+		element: elementToFind,
+		err: err,
+	}
+}
+
 type TestCases struct {
 	name string
 	input arrGenRes
 }
 
 func TestLinearSearch(t *testing.T) {
-	arrayGenerator := generator.NewGenerator([]int{})
+	arrayGenerator := generator.NewGenerator()
 	foundElementOne := 15
 	foundElementTwo := 8
 	foundElementThree := 27
 	testOneInput, foundOne, _ := arrayGenerator.RandomIntegerArrayGenerator(25, foundElementOne, true)
 	testTwoInput, foundTwo, _ := arrayGenerator.RandomIntegerArrayGenerator(30, foundElementTwo, true)
 	testThreeInput, foundThree, _ := arrayGenerator.RandomIntegerArrayGenerator(35, foundElementThree, true)
+	
 	
 	tests := []TestCases{
 		{

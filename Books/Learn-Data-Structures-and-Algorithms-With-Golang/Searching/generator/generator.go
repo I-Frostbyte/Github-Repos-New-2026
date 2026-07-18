@@ -6,12 +6,11 @@ import (
 )
 
 type Generator struct {
-	output []int
 }
 
 func NewGenerator( output []int) *Generator {
 	return &Generator{
-		output: output,
+		
 	}
 }
 
