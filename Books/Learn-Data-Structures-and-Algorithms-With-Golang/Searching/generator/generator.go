@@ -8,9 +8,9 @@ import (
 type Generator struct {
 }
 
-func NewGenerator( output []int) *Generator {
+func NewGenerator() *Generator {
 	return &Generator{
-		
+
 	}
 }
 
