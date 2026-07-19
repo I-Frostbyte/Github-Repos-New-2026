@@ -9,17 +9,17 @@ import (
 
 type arrGenRes struct {
 	array []int
-	found bool
+	isElementFound bool
 	element int
 	err error
 }
 
-func NewInput(arrLength, elementToFind int, lookForElement bool) arrGenRes {
+func NewInput(arrLength, elementToFind int, isElementFound bool) arrGenRes {
 	arrayGenerator := generator.NewGenerator()
-	testInput, elementFound, err := arrayGenerator.RandomIntegerArrayGenerator(arrLength, elementToFind, lookForElement)
+	testInput, isElementFound, err := arrayGenerator.RandomIntegerArrayGenerator(arrLength, elementToFind, isElementFound)
 	return arrGenRes{
 		array: *testInput,
-		found: elementFound,
+		isElementFound: isElementFound,
 		element: elementToFind,
 		err: err,
 	}
@@ -48,11 +48,11 @@ func TestLinearSearch(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			foundElement := LinearSearch(test.input.array, test.input.element)
-			want := test.input.found
-			if foundElement != want {
-				t.Errorf("\n Got: %v \n Want: %v \n", foundElement, want)
-				t.Logf("\n Got: %v \n Want: %v \n", foundElement, want)
+			wasElementFound := LinearSearch(test.input.array, test.input.element)
+			want := test.input.isElementFound
+			if wasElementFound != want {
+				t.Errorf("\n Got: %v \n Want: %v \n", wasElementFound, want)
+				t.Logf("\n Got: %v \n Want: %v \n", wasElementFound, want)
 			}
 		})
 	}
