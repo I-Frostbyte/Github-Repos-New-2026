@@ -1,6 +1,9 @@
 package simplemap
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+)
 
 type StudentClass struct {
 	className string
@@ -42,4 +45,21 @@ func(sc *StudentClass) CheckAttendance(class StudentClass) []string {
 	}
 
 	return absentees
+}
+
+func EqualIgnortOrderSort(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+
+	// Create copies to avoid mutating the original data
+	aCopy := slices.Clone(a)
+	bCopy := slices.Clone(b)
+
+	// Sort both collections lexicographically
+	slices.Sort(aCopy)
+	slices.Sort(bCopy)
+
+	// Perform an index-to-index comparison
+	return slices.Equal(aCopy, bCopy)
 }
