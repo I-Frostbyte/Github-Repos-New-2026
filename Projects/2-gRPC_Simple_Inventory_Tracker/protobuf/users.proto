@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package usersgrpc;
+
+option go_package = "github.com/I-Frostbyte/Github-Repos-New-2026/Projects/2-gRPC_Simple_Inventory_Tracker/grpc/go/usersgrpc";
+
+import "google/protobuf/timestamp.proto";
+// import "google/api/annotations.proto";
+
+enum UserRole {
+    USER_ROLE_UNSPECIFIED = 0;
+    USER_ROLE_ADMIN = 1;
+    USER_ROLE_USER = 2;
+}
+
+message User {
+    string id = 1;
+    string username = 2;
+    string password = 3;
+    string phone_number = 4;
+    UserRole user_role = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message SignUpRequest {
+    string username = 1;
+    string password = 2;
+    string phone_number = 3;
+}
+
+message SignUpResponse {
+    User user = 1;
+}
+
+service UserService {
+    rpc CreateUser (SignUpRequest) returns (SignUpResponse);
+    // {
+    //     option (google.api.http) = {
+    //         post : "/v1/public/users/signup"
+    //         body : "*"
+    //     };
+    // }
+}
