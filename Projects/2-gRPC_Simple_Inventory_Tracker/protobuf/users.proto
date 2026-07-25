@@ -33,7 +33,7 @@ message SignUpResponse {
     User user = 1;
 }
 
-service UserService {
+service UsersService {
     rpc CreateUser (SignUpRequest) returns (SignUpResponse);
     // {
     //     option (google.api.http) = {
