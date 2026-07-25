@@ -291,8 +291,8 @@ const file_users_proto_rawDesc = "" +
 	"\bUserRole\x12\x19\n" +
 	"\x15USER_ROLE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fUSER_ROLE_ADMIN\x10\x01\x12\x12\n" +
-	"\x0eUSER_ROLE_USER\x10\x022P\n" +
-	"\vUserService\x12A\n" +
+	"\x0eUSER_ROLE_USER\x10\x022Q\n" +
+	"\fUsersService\x12A\n" +
 	"\n" +
 	"CreateUser\x12\x18.usersgrpc.SignUpRequest\x1a\x19.usersgrpc.SignUpResponseBiZggithub.com/I-Frostbyte/Github-Repos-New-2026/Projects/2-gRPC_Simple_Inventory_Tracker/grpc/go/usersgrpcb\x06proto3"
 
@@ -322,8 +322,8 @@ var file_users_proto_depIdxs = []int32{
 	4, // 1: usersgrpc.User.created_at:type_name -> google.protobuf.Timestamp
 	4, // 2: usersgrpc.User.updated_at:type_name -> google.protobuf.Timestamp
 	1, // 3: usersgrpc.SignUpResponse.user:type_name -> usersgrpc.User
-	2, // 4: usersgrpc.UserService.CreateUser:input_type -> usersgrpc.SignUpRequest
-	3, // 5: usersgrpc.UserService.CreateUser:output_type -> usersgrpc.SignUpResponse
+	2, // 4: usersgrpc.UsersService.CreateUser:input_type -> usersgrpc.SignUpRequest
+	3, // 5: usersgrpc.UsersService.CreateUser:output_type -> usersgrpc.SignUpResponse
 	5, // [5:6] is the sub-list for method output_type
 	4, // [4:5] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
