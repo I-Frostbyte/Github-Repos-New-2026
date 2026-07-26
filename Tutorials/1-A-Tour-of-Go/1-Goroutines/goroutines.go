@@ -17,7 +17,7 @@ func RandomArrayGenerator(arrayLength int) []int {
 	return newArray
 }
 
-func CreateAndSortArray(arrayLength int) {
+func CreateAndSortArray(arrayLength int) []int {
 	var newRandomArray []int = RandomArrayGenerator(12)
 
 	fmt.Println("Created Array: ", newRandomArray)
@@ -41,5 +41,5 @@ func CreateAndSortArray(arrayLength int) {
 
 	fmt.Println("Sorted Array: ", sortedArray)
 
-	// return newRandomArray
+	return sortedArray
 }
