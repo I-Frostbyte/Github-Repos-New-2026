@@ -7,6 +7,7 @@ on:
   pull_request:
     paths:
       - 'Exercises/2-Sorting_Exercise_Sorting_Program/**'
+    types: [opened, synchronize, reopened]
 
 jobs:
  sorting-program-test:
