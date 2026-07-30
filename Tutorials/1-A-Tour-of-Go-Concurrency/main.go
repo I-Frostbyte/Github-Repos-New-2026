@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	goroutine "github.com/I-Frostbyte/Github-Repos-New-2026/Tutorials/1-A-Tour-of-Go/1-Goroutines"
-	channels "github.com/I-Frostbyte/Github-Repos-New-2026/Tutorials/1-A-Tour-of-Go/2-Channels"
-	buffered_channels "github.com/I-Frostbyte/Github-Repos-New-2026/Tutorials/1-A-Tour-of-Go/3-Buffered_Channels"
-	range_and_close "github.com/I-Frostbyte/Github-Repos-New-2026/Tutorials/1-A-Tour-of-Go/4-Range_and_Close"
+	goroutine "github.com/I-Frostbyte/Github-Repos-New-2026/Tutorials/1-A-Tour-of-Go-Concurrency/1-Goroutines"
+	channels "github.com/I-Frostbyte/Github-Repos-New-2026/Tutorials/1-A-Tour-of-Go-Concurrency/2-Channels"
+	buffered_channels "github.com/I-Frostbyte/Github-Repos-New-2026/Tutorials/1-A-Tour-of-Go-Concurrency/3-Buffered_Channels"
+	range_and_close "github.com/I-Frostbyte/Github-Repos-New-2026/Tutorials/1-A-Tour-of-Go-Concurrency/4-Range_and_Close"
 )
 
 func main () {
