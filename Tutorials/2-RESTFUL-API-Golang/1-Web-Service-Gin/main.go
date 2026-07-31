@@ -8,14 +8,14 @@ import (
 )
 
 // album represents data about a record album.
-type album struct {
+type Album struct {
 	ID string `json:"id"`
 	Title string `json:"title"`
 	Artist string `json:"artist"`
 	Price float64 `json:"price"`
 }
 
-var albums = []album{
+var albums = []Album{
 	{
 		ID: "1",
 		Title: "Blue Train",
@@ -62,7 +62,7 @@ func getAlbums(ctx *gin.Context) {
 
 // postAlbums adds an album from JSON received in the request bod.
 func postAlbums(ctx *gin.Context) {
-	var newAlbum album
+	var newAlbum Album
 
 	// Call BindJSON to bind the received JSON to newAlbum.
 	if err := ctx.BindJSON(&newAlbum); err != nil {
