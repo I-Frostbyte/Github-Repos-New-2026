@@ -17,4 +17,7 @@ func main() {
 		23,
 	)
 	fmt.Println(newUser.GetName(newUser))
+
+	age := methods.Age(23)
+	fmt.Println(age.IsAdult())
 }
