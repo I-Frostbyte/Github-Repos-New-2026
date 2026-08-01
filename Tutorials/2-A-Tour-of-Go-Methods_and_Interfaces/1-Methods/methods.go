@@ -14,6 +14,8 @@ type User struct {
 	address string
 }
 
+type Age int64
+
 func (v Vertex) Abs() float64 {
 	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
@@ -36,4 +38,11 @@ func NewUser(
 
 func (u User) GetName(user User) string {
 	return user.name
+}
+
+func (a Age) IsAdult() bool {
+	if a >= 18 {
+		return true
+	}
+	return false
 }
