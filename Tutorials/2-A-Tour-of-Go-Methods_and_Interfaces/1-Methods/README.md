@@ -1,11 +1,16 @@
-# 🚀 A Tour of Go - Concurrency
+# 🚀 A Tour of Go - Methods and Interfaces
 
 -----------------------------------------------------------------------------------------------------------------------------
 A Tour of Go:
-- Goroutines
-- Channels
-- Buffered Channels
-- Range and Close
-- Select
-- Default Selection
+- Methods
+- Pointer Receivers
+- Methods and Pointer indirection
+- Interfaces
+- Interface Values
+- The Empty Interface
+- Type Assertions
+- Stringers
+- Errors
+- Readers
+- Images
 -----------------------------------------------------------------------------------------------------------------------------
