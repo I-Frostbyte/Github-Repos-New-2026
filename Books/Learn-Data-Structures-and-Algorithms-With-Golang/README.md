@@ -14,3 +14,22 @@ Work with algorithms such as garbage collection for efficient memory management
 Analyze the cost and benefit trade-off to identify algorithms and data structures for problem solving
 Explore techniques for writing pseudocode algorithm and ace whiteboard coding in interviews
 Discover the pitfalls in selecting data structures and algorithms by predicting their speed and efficiencyWho this book is forThis book is for developers who want to understand how to select the best data structures and algorithms that will help solve coding problems. Basic Go programming experience will be an added advantage.Downloading the example code for this book You can download the example code files for all Packt books you have purchased from your account at http://www.PacktPub.com. If you purchased this book elsewhere, you can visit http://www.PacktPub.com/support and register to have the files e-mailed directly to you.
+
+## Folder Structure
+
+This folder contains the code written while following the book, split into two
+independent Go modules (each with its own `go.mod` / `Makefile`).
+
+| Folder | Contents |
+| --- | --- |
+| [Searching](Searching) | Search algorithm implementations: [1-Linear](Searching/1-Linear), [2-Binary](Searching/2-Binary), plus a shared [generator](Searching/generator) used by the tests. |
+| [Sorting](Sorting) | Six classic sorting algorithms: [1-Bubble](Sorting/1-Bubble), [2-Selection](Sorting/2-Selection), [3-Insertion](Sorting/3-Insertion), [4-Shell](Sorting/4-Shell), [5-Merge](Sorting/5-Merge), [6-Quick](Sorting/6-Quick). |
+
+## Running the Code
+
+Each sub-folder is a standalone Go module. Run the tests from within
+`Searching/` or `Sorting/`:
+
+```bash
+make test        # go test -v ./...
+```

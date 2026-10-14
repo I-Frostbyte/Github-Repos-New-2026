@@ -26,3 +26,32 @@ Notice something important:
 Merge Sort splits first, then sorts.
 
 Quick Sort sorts while splitting.
+
+## Folder Structure
+
+```
+6-Quick/
+├── main.go        # QuickSort + divideParts + demo main()
+├── main_test.go   # TestQuickSort (random inputs)
+└── README.md
+```
+
+## Files
+
+| File | Contents |
+| --- | --- |
+| `main.go` | `main()` sorts `{11, 4, 8, 6, 19, 21, 71, 13, 15, 2}` by calling `QuickSort(newArray, 0, 9)`; `QuickSort(numbersArray []int, below, upper int) []int` partitions then recurses; `divideParts` performs the Lomuto-style partition around the last element. |
+| `main_test.go` | `TestQuickSort` runs three generated arrays (lengths 15, 25, 50) and asserts with `slices.IsSorted`. |
+
+## API
+
+```go
+// QuickSort sorts numbersArray[below..upper] in ascending order.
+func QuickSort(numbersArray []int, below, upper int) []int
+```
+
+## Notes
+
+* Complexity: **O(n log n)** average, **O(n²)** worst case; **O(log n)** stack
+  space on average.
+* In-place; not stable.
