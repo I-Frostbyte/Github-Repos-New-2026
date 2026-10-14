@@ -101,8 +101,7 @@ Interview-style problems and take-home simulations.
   - `main.go` defines `FileStorage` with `Upload`, `GetMetadata`, `Download` and `Delete`.
   - Generates UUIDs (`github.com/google/uuid`), reads file metadata and contents.
   - Module: `go.mod` / `go.sum`.
-
-> [Interviews/README.md](Interviews/README.md) is currently an empty placeholder.
+  - See [Interviews/README.md](Interviews/README.md) for a full method reference.
 
 ---
 
@@ -111,7 +110,7 @@ Interview-style problems and take-home simulations.
 Larger multi-file applications.
 
 ### [1-Expo_App_First_Iteration](Projects/1-Expo_App_First_Iteration)
-- **Type:** Mobile app (Expo). Root [README](Projects/1-Expo_App_First_Iteration/README.md) is a placeholder; see the app README.
+- **Type:** Mobile app (Expo). See [README](Projects/1-Expo_App_First_Iteration/README.md) and the app README.
 - **[mobile/](Projects/1-Expo_App_First_Iteration/mobile/README.md)** — Expo SDK 54 + React Native + TypeScript app.
   - File-based routing via **expo-router** (`app/_layout.tsx`, `app/index.tsx`).
   - Config: `app.json`, `tsconfig.json` (path alias `@/*`), `eslint.config.js`, `package.json`.
@@ -133,7 +132,7 @@ Larger multi-file applications.
 - **inventories/** — currently empty (planned feature).
 - Run: `make test` / `make bench-test` ([Makefile](Projects/2-gRPC_Simple_Inventory_Tracker/Makefile)).
 
-> [Projects/README.md](Projects/README.md) is currently an empty placeholder.
+See [Projects/README.md](Projects/README.md) for a summary of both projects.
 
 ---
 
@@ -155,10 +154,7 @@ Guided walk-throughs, mostly from the official *A Tour of Go* and Gin docs.
   - Run: `make test` ([Makefile](Tutorials/3-Restful-Api-Golang/Makefile)).
 - **[4-Simple-Gin-Server](Tutorials/4-Simple-Gin-Server/README.md)** — Gin server basics.
   - [1-Using-HTTP-Method](Tutorials/4-Simple-Gin-Server/1-Using-HTTP-Method) — route handlers for GET/POST/PUT/PATCH/DELETE/HEAD/OPTIONS.
-  - [2-Parameters-in-path](Tutorials/4-Simple-Gin-Server/2-Parameters-in-path) — `:name` and `*action` path parameters.
-  - `main.go` runs three servers concurrently (`:8080`, `:5050`, `:5151`) via `errgroup`. Run: `make run` ([Makefile](Tutorials/4-Simple-Gin-Server/Makefile)).
-
-> [Tutorials/README.md](Tutorials/README.md) is currently an empty placeholder.
+  - `main.go` runs two servers concurrently (`:8080`, `:5050`) via `errgroup`. Run: `make run` ([Makefile](Tutorials/4-Simple-Gin-Server/Makefile)).
 
 ---
 
@@ -179,7 +175,7 @@ Guided walk-throughs, mostly from the official *A Tour of Go* and Gin docs.
   - `test` — `go test -v ./...` (simple) or a recursive `find ... -name "*_test.go"` (multi-package).
   - `bench-test` — runs benchmarks.
   - `run` — `go run main.go`.
-- **README style:** Most folders carry a `# 🚀 Title` heading with `## Description` and, where
-  relevant, a `## Folder Structure` list.
-- **Note:** Several READMEs (`Interviews/`, `Projects/`, `Tutorials/`, and a few sub-folders) are
-  intentionally empty placeholders awaiting content.
+- **README style:** Folders carry a `# 🚀 Title` heading; the sub-folder READMEs
+  document their folder's files, public API, tests and commands.
+- **Note:** [Coding-Challenges/Exercism/1-Hello-World](Coding-Challenges/Exercism/1-Hello-World)
+  currently contains only a placeholder README (no solution code).

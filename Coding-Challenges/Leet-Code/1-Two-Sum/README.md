@@ -37,3 +37,26 @@ Output: [0,1]
 ## Follow-up
 Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
 -----------------------------------------------------------------------------------------------------------------------------
+
+## Folder Structure
+
+```
+1-Two-Sum/
+├── main.go        # TwoSum stub + empty main()
+├── main_test.go   # Empty TestTwoSum placeholder
+└── README.md
+```
+
+## Implementation Status
+
+| Item | State |
+| --- | --- |
+| `main.go` | `main()` is empty; `TwoSum(nums []int, target int) []int` currently `panic("unimplemented")`. |
+| `main_test.go` | `TestTwoSum` is declared but contains no assertions yet. |
+
+## API
+
+```go
+// TwoSum returns the indices of the two numbers that add up to target.
+func TwoSum(nums []int, target int) []int
+```
